@@ -1,7 +1,6 @@
 const Chat = require("../models/chat");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
-const user = require("../models/user");
 
 // GET ONE ON ONE CHAT
 exports.getOneOnOneChat = asyncHandler(async (req, res) => {
@@ -56,6 +55,7 @@ exports.getAllChats = asyncHandler(async (req, res) => {
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
       .sort({ updatedAt: -1 });
+      console.log(chats);
 
     chats = await User.populate(chats, {
       path: "latestMessage.sender",

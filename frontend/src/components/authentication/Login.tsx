@@ -19,8 +19,8 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-import UserContext from "../context/userContext";
-import { AuthProps, UserActionType } from "../utils/types";
+import UserContext from "../../context/userContext";
+import { AuthProps, UserActionType } from "../../utils/types";
 
 const Login = ({ setSignupOrLogin }: AuthProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +30,7 @@ const Login = ({ setSignupOrLogin }: AuthProps) => {
 
   const toast = useToast();
 
-  const { dispatch } = useContext(UserContext);
+  const { dispatch: dispatchUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const loginHandler = async (e: React.FormEvent) => {
@@ -58,7 +58,7 @@ const Login = ({ setSignupOrLogin }: AuthProps) => {
       );
 
       // Dispatch user state
-      dispatch({ type: UserActionType.SET_USER, payload: data });
+      dispatchUser({ type: UserActionType.SET_USER, payload: data });
 
       setIsLoading(false);
       localStorage.setItem("userInfo", JSON.stringify(data));

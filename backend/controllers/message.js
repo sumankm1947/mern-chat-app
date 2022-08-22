@@ -46,7 +46,7 @@ exports.sendMessage = asyncHandler(async (req, res, next) => {
       select: "name avatar",
     });
 
-    Chat.findByIdAndUpdate(chatId, { latestMessage: newMessage });
+    await Chat.findByIdAndUpdate(chatId, { latestMessage: newMessage });
     res.json(newMessage);
   } catch (error) {
     res.status(500);

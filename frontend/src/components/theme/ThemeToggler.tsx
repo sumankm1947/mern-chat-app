@@ -10,7 +10,7 @@ export default function ThemeToggler() {
       top={3}
       right={3}
       zIndex="100"
-      display={{ base: "none", md: "block" }}
+      display={{ base: "none", sm: "block" }}
     >
       <IconButton
         aria-label={colorMode === "light" ? "Dark Theme" : "Light Theme"}

@@ -1,8 +1,8 @@
 import { useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import Login from "../components/Login";
+import Login from "../components/authentication/Login";
 
-import Signup from "../components/Signup";
+import Signup from "../components/authentication/Signup";
 
 const Home = () => {
   const [signupOrLogin, setSignupOrLogin] = useState("signup");

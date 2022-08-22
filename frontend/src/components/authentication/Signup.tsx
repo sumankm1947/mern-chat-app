@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-import UserContext from "../context/userContext";
-import { AuthProps, UserActionType } from "../utils/types";
+import UserContext from "../../context/userContext";
+import { AuthProps, UserActionType } from "../../utils/types";
 
 import {
   Flex,
@@ -35,7 +35,7 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { dispatch } = useContext(UserContext);
+  const { dispatch: dispatchUser } = useContext(UserContext);
 
   const singupHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +95,7 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
       );
 
       // DISPATCH
-      dispatch({ type: UserActionType.SET_USER, payload: data });
+      dispatchUser({ type: UserActionType.SET_USER, payload: data });
 
       // console.log(state.user);
 

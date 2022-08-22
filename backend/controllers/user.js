@@ -3,6 +3,9 @@ const User = require("../models/user");
 const generateToken = require("../utils/token");
 
 module.exports.allUsers = asyncHandler(async (req, res, next) => {
+  if (req.query.search === "") {
+    return res.status(400).json({ message: "keyword is required" });
+  }
   const keyword = req.query.search
     ? { name: { $regex: req.query.search, $options: "i" } }
     : {};

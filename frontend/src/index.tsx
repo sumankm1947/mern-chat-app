@@ -4,7 +4,8 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import UserContextProvider from "./context/userContextProvider";
+import UserContextProvider from "./context/UserContextProvider";
+import ChatContextProvider from "./context/ChatContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,7 +15,9 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <UserContextProvider>
-          <App />
+          <ChatContextProvider>
+            <App />
+          </ChatContextProvider>
         </UserContextProvider>
       </BrowserRouter>
     </ChakraProvider>
