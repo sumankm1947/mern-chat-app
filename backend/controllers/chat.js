@@ -55,8 +55,7 @@ exports.getAllChats = asyncHandler(async (req, res) => {
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
       .sort({ updatedAt: -1 });
-      console.log(chats);
-
+      
     chats = await User.populate(chats, {
       path: "latestMessage.sender",
       select: "name avatar",

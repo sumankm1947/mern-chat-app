@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Stack,
   Text,
   useToast,
@@ -10,11 +9,11 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 import ChatContext from "../../context/chatContext";
 import UserContext from "../../context/userContext";
 import { Chat, ChatActionType } from "../../utils/types";
 import { getSender } from "../../utils/user";
+import GroupChatModal from "./GroupChatModal";
 
 const MyChats = () => {
   const { state: chatState, dispatch: dispatchChat } = useContext(ChatContext);
@@ -69,6 +68,7 @@ const MyChats = () => {
     };
     fetchChats();
   }, [userState, toast, dispatchChat]);
+  // console.log(chatState.chats);
 
   return (
     <Box
@@ -80,6 +80,7 @@ const MyChats = () => {
       w={{ base: "100%", md: "30%" }}
       borderRadius="lg"
       borderWidth="1px"
+      height="88vh"
     >
       <Box
         pb={3}
@@ -96,15 +97,7 @@ const MyChats = () => {
         >
           My Chats
         </Text>
-        {/* <GroupChatModal> */}
-        <Button
-          display="flex"
-          fontSize={{ base: "10px", sm: "17px", md: "10px", lg: "12px" }}
-          rightIcon={<AiOutlinePlus />}
-        >
-          New Group Chat
-        </Button>
-        {/* </GroupChatModal> */}
+        <GroupChatModal />
       </Box>
       <Box
         display="flex"

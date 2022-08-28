@@ -75,7 +75,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
     }
   };
 
-  const accessChat = async (userId: string) => {
+  const accessChat = async (user: User) => {
     try {
       setLoadingChat(true);
       const config = {
@@ -86,7 +86,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
       };
       const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}/chat`,
-        { userId },
+        { userId: user._id },
         config
       );
 

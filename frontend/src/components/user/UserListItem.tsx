@@ -3,7 +3,7 @@ import { User } from "../../utils/types";
 
 type Props = {
   user: User;
-  accessChat: (userId: string) => Promise<void>;
+  accessChat: (user: User) => Promise<void> | void;
 };
 
 const UserListItem = ({ user, accessChat }: Props) => {
@@ -24,7 +24,7 @@ const UserListItem = ({ user, accessChat }: Props) => {
       px={3}
       py={2}
       borderRadius="lg"
-      onClick={() => accessChat(user._id)}
+      onClick={() => accessChat(user)}
     >
       <Avatar name={user.name} src={user.avatar} cursor="pointer" size="sm" />
       <Text marginInline={2}>{user.name}</Text>

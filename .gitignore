@@ -1,12 +1,10 @@
 # BACKEND
 backend/.env
-backend/yarn.lock
 backend/node_modules/
 
 # FRONTEND
 # dependencies
 frontend/node_modules/
-frontend/yarn.lock
 frontend/.pnp
 .pnp.js
 
