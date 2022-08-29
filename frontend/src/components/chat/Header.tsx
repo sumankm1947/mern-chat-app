@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Fragment, useContext } from "react";
@@ -19,6 +20,7 @@ import SideDrawer from "./SideDrawer";
 const Header = () => {
   const { state: userState, dispatch: dispatchUser } = useContext(UserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toggleColorMode } = useColorMode();
 
   const navigate = useNavigate();
 
@@ -64,6 +66,7 @@ const Header = () => {
           <MenuList>
             <MenuItem>My Profile</MenuItem>
             <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+            <MenuItem onClick={toggleColorMode} display={{base: "flex", md: "none" }}>Change theme</MenuItem>
           </MenuList>
         </Menu>
       </Box>

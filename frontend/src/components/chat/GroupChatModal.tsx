@@ -77,6 +77,21 @@ const GroupChatModal = () => {
     setSelectedUsers((prev) => [...prev, user]);
   };
 
+  const removeUserHandler = (user: User) => {
+    if (!selectedUsers.includes(user)) {
+      toast({
+        title: "User doest not exists",
+        status: "error",
+        isClosable: true,
+        position: "bottom",
+        duration: 2000,
+      });
+      return;
+    }
+
+    setSelectedUsers((prev) => prev.filter((x) => x._id !== user._id));
+  };
+
   const createGroupHandler = async () => {
     if (grpName.trim() === "") {
       toast({
@@ -163,7 +178,7 @@ const GroupChatModal = () => {
                 }
               />
             </FormControl>
-            <FormControl>
+            <FormControl marginBlock={3}>
               <Input
                 placeholder="Add Users..."
                 onChange={(e: React.FormEvent<HTMLInputElement>) =>
@@ -175,7 +190,11 @@ const GroupChatModal = () => {
             {/* GROUP MEMBERS */}
             <Box display="flex" flexWrap="wrap">
               {selectedUsers?.map((user) => (
-                <UserBadgeItem key={user._id} user={user} />
+                <UserBadgeItem
+                  key={user._id}
+                  user={user}
+                  clickHandler={removeUserHandler}
+                />
               ))}
             </Box>
 

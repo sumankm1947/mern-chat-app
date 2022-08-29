@@ -9,6 +9,7 @@ export type User = {
 };
 
 export type Message = {
+  _id: string;
   message: string;
   sender: User;
   readBy: User[];
@@ -45,6 +46,7 @@ export type Chat = {
   isGroup: boolean;
   users: User[];
   latestMessage: Message;
+  groupAdmin: User | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -65,6 +67,6 @@ export type ChatState = {
 };
 
 export type ChatAction =
-  | { type: ChatActionType.SET_SELECTED_CHAT; payload: Chat }
+  | { type: ChatActionType.SET_SELECTED_CHAT; payload: Chat | null}
   | { type: ChatActionType.SET_CHATS; payload: Chat[] }
   | { type: ChatActionType.APPEND_CHAT; payload: Chat };

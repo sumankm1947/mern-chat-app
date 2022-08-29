@@ -20,3 +20,8 @@ code {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+.messages {
+  display: flex;
+  flex-direction: row;
+}

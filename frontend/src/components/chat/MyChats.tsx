@@ -131,8 +131,8 @@ const MyChats = () => {
                   justifyContent="flex-start"
                 >
                   <Avatar
-                    name={otherUser.name}
-                    src={otherUser.avatar}
+                    name={chat.isGroup ? chat.name : otherUser.name}
+                    src={chat.isGroup ? "" : otherUser.avatar}
                     size="sm"
                   />
                   <Box marginLeft={4}>

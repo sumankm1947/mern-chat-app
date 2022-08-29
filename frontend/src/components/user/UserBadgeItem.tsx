@@ -5,9 +5,10 @@ import { User } from "../../utils/types";
 
 type Props = {
   user: User;
+  clickHandler: (user: User) => void;
 };
 
-const UserBadgeItem = ({ user }: Props) => {
+const UserBadgeItem = ({ user, clickHandler }: Props) => {
   return (
     <Badge
       px={2}
@@ -22,8 +23,11 @@ const UserBadgeItem = ({ user }: Props) => {
       display="flex"
       alignItems="center"
       width="fit-content"
+      onClick={() => clickHandler(user)}
     >
-      <Text marginInline={1} textTransform="none" fontSize={12}>{user.name}</Text>
+      <Text marginInline={1} textTransform="none" fontSize={12}>
+        {user.name}
+      </Text>
       <AiOutlineClose />
     </Badge>
   );

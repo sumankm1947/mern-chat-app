@@ -77,7 +77,7 @@ exports.newGroupChat = asyncHandler(async (req, res) => {
   if (users.length < 2)
     return res.status(400).send({ message: "Please select at least 2 users" });
 
-  users.push(req.user);
+  users.unshift(req.user);
 
   try {
     const newGrpChat = await Chat.create({
