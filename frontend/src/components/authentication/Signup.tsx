@@ -84,7 +84,7 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
 
       // Make the signup request to the server
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/signup`,
+        `/user/signup`,
         {
           name,
           email,
