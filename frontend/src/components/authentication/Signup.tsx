@@ -104,7 +104,7 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
       setIsLoading(false);
       return toast({
         title: "Error",
-        description: error.response.data.message,
+        description: "Something went wrong",
         status: "error",
         duration: 5000,
         isClosable: true,
