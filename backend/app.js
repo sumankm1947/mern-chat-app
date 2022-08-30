@@ -12,6 +12,9 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // Routes
+app.use("/", (req, res) => {
+  res.send("APP WORKING");
+});
 const userRoutes = require("./routes/user");
 app.use("/api/v1/user", userRoutes);
 
