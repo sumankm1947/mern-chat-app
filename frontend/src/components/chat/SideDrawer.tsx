@@ -62,7 +62,6 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
       );
       setSearchResults(data);
       setIsLoading(false);
-      console.log(data);
     } catch (error: any) {
       setIsLoading(false);
       toast({
