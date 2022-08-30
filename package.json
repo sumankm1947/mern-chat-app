@@ -4,7 +4,8 @@
   "description": "A chat app using MERN stack and socket.io",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js"
+    "start": "node backend/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [
     "MERN",
