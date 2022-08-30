@@ -155,7 +155,7 @@ const GroupChatModal = () => {
         New Group Chat
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create a group</ModalHeader>

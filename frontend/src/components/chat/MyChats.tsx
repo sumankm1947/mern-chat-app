@@ -15,7 +15,11 @@ import { Chat, ChatActionType } from "../../utils/types";
 import { getSender } from "../../utils/user";
 import GroupChatModal from "./GroupChatModal";
 
-const MyChats = () => {
+type Props = {
+  doFetchChats: boolean;
+};
+
+const MyChats = ({ doFetchChats }: Props) => {
   const { state: chatState, dispatch: dispatchChat } = useContext(ChatContext);
   const { state: userState } = useContext(UserContext);
   const [textSize, setTextSize] = useState(0);
@@ -66,7 +70,7 @@ const MyChats = () => {
       }
     };
     fetchChats();
-  }, [userState, toast, dispatchChat]);
+  }, [userState, toast, dispatchChat, doFetchChats]);
   // console.log(chatState.chats);
 
   return (

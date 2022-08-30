@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
         <UserContextProvider>
@@ -21,5 +21,5 @@ root.render(
         </UserContextProvider>
       </BrowserRouter>
     </ChakraProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

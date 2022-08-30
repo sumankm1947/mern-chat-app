@@ -5,8 +5,11 @@ import ChatContext from "../../context/chatContext";
 import SingleChat from "./SingleChat";
 import { ChatActionType } from "../../utils/types";
 
-const ChatBox = () => {
+type Props = {
+  setDoFetchChats: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+const ChatBox = ({ setDoFetchChats }: Props) => {
   const { state: chatState, dispatch: dispatchChat } = useContext(ChatContext);
 
   const goBackToMyChats = () => {
@@ -36,7 +39,7 @@ const ChatBox = () => {
       >
         <BiArrowBack size={30} onClick={goBackToMyChats} />
       </Box>
-      <SingleChat />
+      <SingleChat setDoFetchChats={setDoFetchChats}/>
     </Box>
   );
 };

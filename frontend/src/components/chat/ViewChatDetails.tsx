@@ -195,7 +195,7 @@ const ViewChatDetails = () => {
               cursor="pointer"
             />
           </Button>
-          <Modal isOpen={isOpenDetails} onClose={onCloseDetails}>
+          <Modal isOpen={isOpenDetails} onClose={onCloseDetails} blockScrollOnMount={false}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader
@@ -329,7 +329,11 @@ const ViewChatDetails = () => {
               src={otherUser.avatar}
             />
           </Button>
-          <Modal isOpen={isOpenDetails} onClose={onCloseDetails}>
+          <Modal
+            isOpen={isOpenDetails}
+            onClose={onCloseDetails}
+            blockScrollOnMount={false}
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalHeader

@@ -11,6 +11,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 code {
@@ -19,9 +21,4 @@ code {
 }
 ::-webkit-scrollbar {
   width: 0px;
-}
-
-.messages {
-  display: flex;
-  flex-direction: row;
 }

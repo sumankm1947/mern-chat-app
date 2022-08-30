@@ -6,6 +6,13 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
   useColorMode,
   useDisclosure,
@@ -13,14 +20,25 @@ import {
 import { Fragment, useContext } from "react";
 import { AiOutlineDown, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import ChatContext from "../../context/chatContext";
 import UserContext from "../../context/userContext";
-import { UserActionType } from "../../utils/types";
+import { ChatActionType, Message, UserActionType } from "../../utils/types";
 import ProfileModal from "../user/ProfileModal";
 import SideDrawer from "./SideDrawer";
 
 const Header = () => {
   const { state: userState, dispatch: dispatchUser } = useContext(UserContext);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { state: chatState, dispatch: dispatchChat } = useContext(ChatContext);
+  const {
+    isOpen: isOpenSideDrawer,
+    onOpen: onOpenSideDrawer,
+    onClose: onCloseSideDrawer,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenNoti,
+    onOpen: onOpenNoti,
+    onClose: onCloseNoti,
+  } = useDisclosure();
   const { toggleColorMode } = useColorMode();
 
   const navigate = useNavigate();
@@ -29,6 +47,17 @@ const Header = () => {
     localStorage.removeItem("userInfo");
     dispatchUser({ type: UserActionType.REMOVE_USER });
     navigate("/");
+  };
+
+  const clearNotificationsHandler = () => {
+    dispatchChat({ type: ChatActionType.CLEAR_NOTIFICATIONS });
+    onCloseNoti();
+  };
+
+  const goToChatHandler = (msg: Message) => {
+    dispatchChat({ type: ChatActionType.SET_SELECTED_CHAT, payload: msg.chat });
+    dispatchChat({ type: ChatActionType.REMOVE_NOTIFICATION, payload: msg})
+    onCloseNoti();
   };
 
   return (
@@ -43,7 +72,7 @@ const Header = () => {
         paddingX="20px"
       >
         <Box>
-          <Button onClick={onOpen}>
+          <Button onClick={onOpenSideDrawer}>
             <AiOutlineSearch color="teal" size="25px" />
             <Text px="3">Search User</Text>
           </Button>
@@ -68,6 +97,48 @@ const Header = () => {
             <MenuItem>
               <ProfileModal>My Profile</ProfileModal>
             </MenuItem>
+            <MenuItem>
+              <Text onClick={onOpenNoti} width="100%">
+                Notifications
+              </Text>
+              <Modal
+                isOpen={isOpenNoti}
+                onClose={onCloseNoti}
+                blockScrollOnMount={false}
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Notifications</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    {chatState.notifications?.length > 0 ? (
+                      <>
+                        {chatState.notifications?.map((noti) => (
+                          <Text
+                            key={noti._id}
+                            onClick={() => goToChatHandler(noti)}
+                          >
+                            Ypu have received a message from {noti.sender.name}
+                          </Text>
+                        ))}
+                      </>
+                    ) : (
+                      <Text>No Notifications</Text>
+                    )}
+                  </ModalBody>
+
+                  <ModalFooter>
+                    <Button
+                      colorScheme="teal"
+                      mr={3}
+                      onClick={clearNotificationsHandler}
+                    >
+                      Clear all
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </MenuItem>
             <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             <MenuItem
               onClick={toggleColorMode}
@@ -78,7 +149,7 @@ const Header = () => {
           </MenuList>
         </Menu>
       </Box>
-      <SideDrawer isOpen={isOpen} onClose={onClose} />
+      <SideDrawer isOpen={isOpenSideDrawer} onClose={onCloseSideDrawer} />
     </Fragment>
   );
 };

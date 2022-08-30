@@ -59,14 +59,21 @@ export enum ChatActionType {
   SET_SELECTED_CHAT = "SET_SELECTED_CHAT",
   SET_CHATS = "SET_CHATS",
   APPEND_CHAT = "APPEND_CHAT",
+  SET_NOTIFICATION = "SET_NOTIFICATION",
+  REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION",
+  CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS",
 }
 
 export type ChatState = {
   selectedChat: Chat | null;
   chats: Chat[];
+  notifications: Message[];
 };
 
 export type ChatAction =
-  | { type: ChatActionType.SET_SELECTED_CHAT; payload: Chat | null}
+  | { type: ChatActionType.SET_SELECTED_CHAT; payload: Chat | null }
   | { type: ChatActionType.SET_CHATS; payload: Chat[] }
-  | { type: ChatActionType.APPEND_CHAT; payload: Chat };
+  | { type: ChatActionType.APPEND_CHAT; payload: Chat }
+  | { type: ChatActionType.SET_NOTIFICATION; payload: Message }
+  | { type: ChatActionType.REMOVE_NOTIFICATION; payload: Message }
+  | { type: ChatActionType.CLEAR_NOTIFICATIONS };

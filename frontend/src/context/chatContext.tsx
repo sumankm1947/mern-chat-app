@@ -9,6 +9,7 @@ const ChatContext = createContext<{
   state: {
     chats: [],
     selectedChat: null,
+    notifications: [],
   },
   dispatch: () => {},
 });

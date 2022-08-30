@@ -109,7 +109,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+    <Drawer isOpen={isOpen} placement="left" onClose={onClose} blockScrollOnMount={false}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
