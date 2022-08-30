@@ -50,7 +50,7 @@ const Login = ({ setSignupOrLogin }: AuthProps) => {
 
     try {
       const { data } = await axios.post(
-        `/user/login`,
+        "/api/v1/user/login",
         {
           email,
           password,

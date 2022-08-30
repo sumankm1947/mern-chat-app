@@ -1,5 +1,5 @@
 # BACKEND
-backend/.env
+.env
 /node_modules/
 
 # FRONTEND
@@ -12,7 +12,7 @@ frontend/.pnp
 frontend/coverage
 
 # production
-frontend/build
+# frontend/build
 
 # misc
 frontend/.DS_Store

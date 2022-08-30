@@ -39,6 +39,7 @@ interface ClientToServerEvents {
 
 let socket: Socket<ServerToClientEvents, ClientToServerEvents>;
 let selectedChatCompare: Chat | null;
+const ENDPOINT = "http://localhost:5000/"
 
 type Props = {
   setDoFetchChats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -59,7 +60,7 @@ const SingleChat = ({ setDoFetchChats }: Props) => {
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    socket = io(process.env.REACT_APP_ENDPOINT as string);
+    socket = io(ENDPOINT);
   }, []);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const SingleChat = ({ setDoFetchChats }: Props) => {
         },
       };
       const { data } = await axios.get(
-        ` /message/${chatState.selectedChat?._id}`,
+        `/api/v1/message/${chatState.selectedChat?._id}`,
         config
       );
       setIsLoading(false);
@@ -144,7 +145,7 @@ const SingleChat = ({ setDoFetchChats }: Props) => {
 
       setNewMessage("");
       const { data } = await axios.post(
-        `/message`,
+        "/api/v1/message",
         {
           message: newMessage,
           chatId: chatState.selectedChat?._id,

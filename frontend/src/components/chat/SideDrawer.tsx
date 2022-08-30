@@ -84,7 +84,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
         },
       };
       const { data } = await axios.post(
-        `/chat`,
+        "/api/v1/chat",
         { userId: user._id },
         config
       );

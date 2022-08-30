@@ -45,7 +45,7 @@ const GroupChatModal = () => {
       };
 
       const { data } = await axios.get(
-        `/user?search=${search.trim()}`,
+        `/api/v1/user?search=${search.trim()}`,
         config
       );
       //   console.log(data);
@@ -122,7 +122,7 @@ const GroupChatModal = () => {
         },
       };
       const { data } = await axios.post(
-        `/chat/group`,
+        `/api/v1/chat/group`,
         {
           name: grpName,
           users: selectedUsers?.map((u) => u._id),
