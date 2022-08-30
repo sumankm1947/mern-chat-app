@@ -61,7 +61,6 @@ const SingleChat = () => {
   }, [chatState.selectedChat, userState.user, toast]);
 
   const sendMessageHandler = async () => {
-    console.log(newMessage);
     try {
       const config = {
         headers: {
@@ -80,7 +79,6 @@ const SingleChat = () => {
         config
       );
 
-      console.log(data);
       setMessages((prev) => [...prev, data]);
     } catch (error: any) {
       toast({

@@ -15,6 +15,7 @@ import { AiOutlineDown, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import { UserActionType } from "../../utils/types";
+import ProfileModal from "../user/ProfileModal";
 import SideDrawer from "./SideDrawer";
 
 const Header = () => {
@@ -64,9 +65,16 @@ const Header = () => {
             />
           </MenuButton>
           <MenuList>
-            <MenuItem>My Profile</MenuItem>
+            <MenuItem>
+              <ProfileModal>My Profile</ProfileModal>
+            </MenuItem>
             <MenuItem onClick={logoutHandler}>Logout</MenuItem>
-            <MenuItem onClick={toggleColorMode} display={{base: "flex", md: "none" }}>Change theme</MenuItem>
+            <MenuItem
+              onClick={toggleColorMode}
+              display={{ base: "flex", md: "none" }}
+            >
+              Change theme
+            </MenuItem>
           </MenuList>
         </Menu>
       </Box>

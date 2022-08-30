@@ -1,4 +1,4 @@
-import {  useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
 
 import { Avatar, Box, Flex, Text, Tooltip } from "@chakra-ui/react";
 import {
@@ -54,7 +54,6 @@ const ScrollableChat = ({ messages }: Props) => {
                 ? "green.200"
                 : "blue.200"
             }
-            marginBlock={1}
             borderRadius={5}
             color="black"
             marginLeft={
@@ -67,14 +66,20 @@ const ScrollableChat = ({ messages }: Props) => {
             maxWidth="90%"
             fontFamily="body"
             fontWeight="medium"
+            marginBlock={
+              isLastMessageFromAUser(messages, message, index) ? 3 : 1
+            }
           >
-            <Text wordBreak="break-all" padding="4px 10px">
+            <Text
+              wordBreak="break-all"
+              padding="4px 10px"
+            >
               {message.message}
             </Text>
           </Box>
         </Flex>
       ))}
-      <AlwaysScrollToBottom messages={messages}/>
+      <AlwaysScrollToBottom messages={messages} />
     </Box>
   );
 };

@@ -55,7 +55,7 @@ exports.getAllChats = asyncHandler(async (req, res) => {
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
       .sort({ updatedAt: -1 });
-      
+
     chats = await User.populate(chats, {
       path: "latestMessage.sender",
       select: "name avatar",
@@ -122,22 +122,30 @@ exports.renameGroupChat = asyncHandler(async (req, res) => {
   }
 });
 
-// ADD USER TO GROUP CHAT
+// ADD USERS TO GROUP CHAT
 exports.addToGroup = asyncHandler(async (req, res) => {
-  const { userId, chatId } = req.body;
-  if (!userId || !chatId)
+  const { userIds, chatId } = req.body;
+  if (!userIds || !chatId)
     return res.status(400).send({ message: "Please fill all required fields" });
 
-  // CHeck if user is already in the chat
-  const { users } = await Chat.findById(chatId);
-  if (users.includes(userId)) {
-    return res.status(400).send({ message: "User already in chat" });
-  }
-
   try {
+    // Check if user is already in the chat
+    const chat = await Chat.findById(chatId);
+
+    if (chat.groupAdmin.toString() !== req.user._id.toString()) {
+      return res.status(401).send({ message: "You do not have permission" });
+    }
+    const { users } = chat;
+
+    for (let i = 0; i < users.length; i++) {
+      if (users.includes(userIds[i])) {
+        return res.status(400).send({ message: "User already in chat" });
+      }
+    }
+
     const updatedChat = await Chat.findByIdAndUpdate(
       chatId,
-      { $push: { users: userId } },
+      { $push: { users: { $each: userIds } } },
       { new: true }
     )
       .populate("users", "-password")
@@ -153,6 +161,44 @@ exports.addToGroup = asyncHandler(async (req, res) => {
   }
 });
 
+// EXIT FROM GROUP
+exports.exitGroup = asyncHandler(async (req, res) => {
+  const { chatId } = req.body;
+  if (!chatId)
+    return res.status(400).send({ message: "Please fill all required fields" });
+  try {
+    let message = "";
+    const chat = await Chat.findById(chatId);
+    
+    if (chat.groupAdmin.toString() === req.user._id.toString()) {
+      await Chat.findByIdAndDelete(chatId);
+      message = "You left and the group was deleted";
+    } else {
+      await Chat.findByIdAndUpdate(chatId, {
+        $pull: { users: req.user._id },
+      });
+      message = "You left the group";
+    }
+
+    let chats = await Chat.find({
+      users: { $all: [req.user._id] },
+    })
+      .populate("users", "-password")
+      .populate("groupAdmin", "-password")
+      .populate("latestMessage")
+      .sort({ updatedAt: -1 });
+
+    chats = await User.populate(chats, {
+      path: "latestMessage.sender",
+      select: "name avatar",
+    });
+
+    res.status(200).json({ chats: chats, message: message });
+  } catch (error) {
+    throw error;
+  }
+});
+
 // REMOVE USER FROM GROUP CHAT
 exports.removeFromGroup = asyncHandler(async (req, res) => {
   const { userId, chatId } = req.body;
@@ -160,6 +206,11 @@ exports.removeFromGroup = asyncHandler(async (req, res) => {
     return res.status(400).send({ message: "Please fill all required fields" });
 
   try {
+    const chat = await Chat.findById(chatId);
+    if (chat.groupAdmin.toString() !== req.user._id.toString()) {
+      res.status(401).send({ message: "You do not have permission" });
+    }
+
     const updatedChat = await Chat.findByIdAndUpdate(
       chatId,
       { $pull: { users: userId } },

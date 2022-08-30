@@ -121,12 +121,6 @@ const GroupChatModal = () => {
           Authorization: `Bearer ${userState.user?.token}`,
         },
       };
-
-      console.log(
-        config,
-        selectedUsers.map((u) => u._id)
-      );
-
       const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}/chat/group`,
         {
@@ -135,7 +129,6 @@ const GroupChatModal = () => {
         },
         config
       );
-      console.log(data);
       onClose();
 
       dispatchChat({ type: ChatActionType.APPEND_CHAT, payload: data });

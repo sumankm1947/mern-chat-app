@@ -41,7 +41,6 @@ const MyChats = () => {
   useEffect(() => {
     const fetchChats = async () => {
       if (!userState.user) return;
-      // console.log(chatState);
 
       try {
         const config = {
