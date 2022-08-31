@@ -6,4 +6,4 @@
 <!-- MICRO DETAILS -->
 5. When someone leave a group, give a message to the group
 6. Make the notification part a bit beautiful
-7. 
+7. Refactor the frontend code
