@@ -28,7 +28,7 @@ const ChatBox = ({ setDoFetchChats }: Props) => {
       w={{ base: "100%", md: "70%" }}
       borderRadius="lg"
       borderWidth="1px"
-      height={{base: "82vh", md: "88vh"}}
+      height="88vh"
       position="relative"
     >
       <Box
