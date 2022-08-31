@@ -82,7 +82,7 @@ const SingleChat = ({ setDoFetchChats }: Props) => {
         },
       };
       const { data } = await axios.get(
-        `/api/v1/message/${chatState.selectedChat?._id}`,
+        `${process.env.REACT_APP_API_URL}/message/${chatState.selectedChat?._id}`,
         config
       );
       setIsLoading(false);
@@ -145,7 +145,7 @@ const SingleChat = ({ setDoFetchChats }: Props) => {
 
       setNewMessage("");
       const { data } = await axios.post(
-        "/api/v1/message",
+        `${process.env.REACT_APP_API_URL}/message`,
         {
           message: newMessage,
           chatId: chatState.selectedChat?._id,

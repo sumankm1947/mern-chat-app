@@ -57,7 +57,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
       };
 
       const { data } = await axios(
-        `/user?search=${search}`,
+        `${process.env.REACT_APP_API_URL}/user?search=${search}`,
         config
       );
       setSearchResults(data);
@@ -84,7 +84,7 @@ const SideDrawer = ({ isOpen, onClose }: Props) => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/chat",
+        `${process.env.REACT_APP_API_URL}/chat`,
         { userId: user._id },
         config
       );

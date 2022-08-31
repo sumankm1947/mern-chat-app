@@ -63,7 +63,7 @@ const ViewChatDetails = () => {
 
     try {
       const { data } = await axios.post(
-        "/api/v1/chat/exit",
+        `${process.env.REACT_APP_API_URL}/chat/exit`,
         {
           chatId: chatState.selectedChat?._id,
         },
@@ -105,7 +105,7 @@ const ViewChatDetails = () => {
       };
 
       const { data } = await axios.get(
-        `/api/v1/user?search=${search.trim()}`,
+        `${process.env.REACT_APP_API_URL}/user?search=${search.trim()}`,
         config
       );
       //   console.log(data);
@@ -162,7 +162,7 @@ const ViewChatDetails = () => {
       };
 
       const { data } = await axios.put(
-        "/api/v1/chat/add",
+        `${process.env.REACT_APP_API_URL}/chat/add`,
         {
           chatId: chatState.selectedChat?._id,
           userIds: selectedUsers.map((user) => user._id),

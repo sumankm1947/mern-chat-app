@@ -54,7 +54,7 @@ const MyChats = ({ doFetchChats }: Props) => {
         };
 
         const { data } = await axios.get(
-          "/api/v1/chat",
+          `${process.env.REACT_APP_API_URL}/chat`,
           config
         );
         dispatchChat({ type: ChatActionType.SET_CHATS, payload: data });
