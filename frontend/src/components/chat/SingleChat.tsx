@@ -39,7 +39,7 @@ interface ClientToServerEvents {
 
 let socket: Socket<ServerToClientEvents, ClientToServerEvents>;
 let selectedChatCompare: Chat | null;
-const ENDPOINT = "https://gossip-web.herokuapp.com/"
+const ENDPOINT = process.env.REACT_APP_ENDPOINT as string;
 
 type Props = {
   setDoFetchChats: React.Dispatch<React.SetStateAction<boolean>>;

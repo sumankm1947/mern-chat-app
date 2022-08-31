@@ -66,11 +66,11 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
       if (avatar?.type === "image/jpeg" || avatar?.type === "image/png") {
         const formData = new FormData();
         formData.append("file", avatar);
-        formData.append("upload_preset", "gossip");
-        formData.append("cloud_name", "superbsuman");
+        formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET as string);
+        formData.append("cloud_name", process.env.REACT_APP_CLOUDINARY_NAME as string);
 
         const { data } = await axios.post(
-          `https://api.cloudinary.com/v1_1/superbsuman/image/upload`,
+          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME as string}/image/upload`,
           formData
         );
         url = data.secure_url;
