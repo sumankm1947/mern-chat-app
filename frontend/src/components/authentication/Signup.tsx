@@ -66,33 +66,24 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
       if (avatar?.type === "image/jpeg" || avatar?.type === "image/png") {
         const formData = new FormData();
         formData.append("file", avatar);
-        formData.append(
-          "upload_preset",
-          process.env.REACT_APP_CLOUDINARY_PRESET as string
-        );
-        formData.append(
-          "cloud_name",
-          process.env.REACT_APP_CLOUDINARY_NAME as string
-        );
+        formData.append("upload_preset", "gossip");
+        formData.append("cloud_name", "superbsuman");
 
         const { data } = await axios.post(
-          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
+          `https://api.cloudinary.com/v1_1/superbsuman/image/upload`,
           formData
         );
         url = data.secure_url;
       }
 
       // Make the signup request to the server
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/signup`,
-        {
-          name,
-          email,
-          password,
-          avatar: url === "" ? null : url,
-          confirmPassword,
-        }
-      );
+      const { data } = await axios.post("/api/v1/user/signup", {
+        name,
+        email,
+        password,
+        avatar: url === "" ? null : url,
+        confirmPassword,
+      });
 
       // DISPATCH
       dispatchUser({ type: UserActionType.SET_USER, payload: data });
@@ -113,7 +104,7 @@ const Signup = ({ setSignupOrLogin }: AuthProps) => {
       setIsLoading(false);
       return toast({
         title: "Error",
-        description: error.response.data.message,
+        description: "Something went wrong",
         status: "error",
         duration: 5000,
         isClosable: true,

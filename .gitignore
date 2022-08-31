@@ -1,6 +1,6 @@
 # BACKEND
-backend/.env
-backend/node_modules/
+.env
+/node_modules/
 
 # FRONTEND
 # dependencies
@@ -12,7 +12,7 @@ frontend/.pnp
 frontend/coverage
 
 # production
-frontend/build
+# frontend/build
 
 # misc
 frontend/.DS_Store
