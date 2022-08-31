@@ -83,7 +83,7 @@ const MyChats = ({ doFetchChats }: Props) => {
       w={{ base: "100%", md: "30%" }}
       borderRadius="lg"
       borderWidth="1px"
-      height="88vh"
+      height={{base: "82vh", md: "88vh"}}
     >
       <Box
         pb={3}
