@@ -12,7 +12,7 @@ This is a chat app which is built using sockets => supports real-time messages
 
 ## PICTURES
 
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px;">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; width: 100%;">
     <img src="./demo-images/1.jpg" height="300"  width="580" alt="Demo-1">
     <img src="./demo-images/2.jpg" height="300"  width="580" alt="Demo-2">
     <div>
