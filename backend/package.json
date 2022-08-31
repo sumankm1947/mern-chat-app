@@ -4,7 +4,8 @@
   "description": "A chat app using MERN stack and socket.io",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "MERN",
