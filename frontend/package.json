@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy": "https://gossip-web-backend.herokuapp.com",
+  "proxy": "https://gossip-web-backend.onrender.com",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.2.8",
